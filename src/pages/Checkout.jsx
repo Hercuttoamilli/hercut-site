@@ -24,7 +24,8 @@ export default function Checkout() {
 
     setLoading(true);
     try {
-      const response = await axios.post("https://hercut-backend.onrender.com", {
+      const response = await axios.post("https://hercut-backend.onrender.com/create-checkout-session", {
+
         plan,
       });
       window.location.href = response.data.url;
