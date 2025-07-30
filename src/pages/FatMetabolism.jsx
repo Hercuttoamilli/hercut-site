@@ -8,7 +8,7 @@ export default function FatMetabolism() {
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
 
       <div className="max-w-4xl mx-auto space-y-14 relative z-10">
-        {/* Header */}
+        {/* Header. */}
         <header className="text-center">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-pink-400 to-pink-600 text-transparent bg-clip-text">
             Fat Metabolism
