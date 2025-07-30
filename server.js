@@ -6,10 +6,11 @@ import bodyParser from "body-parser";
 import admin from "firebase-admin";
 
 dotenv.config();
+
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// ✅ Firebase credentials from ENV
+// ✅ Firebase setup
 admin.initializeApp({
   credential: admin.credential.cert({
     type: process.env.FIREBASE_TYPE,
@@ -27,17 +28,17 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-// ✅ Stripe Webhook
+// ✅ Middleware
+app.use(cors());
+app.use(express.json());
+
+// ✅ Webhook for Stripe
 app.post("/webhook", bodyParser.raw({ type: "application/json" }), async (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error("⚠️ Webhook signature verification failed.", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
@@ -45,7 +46,6 @@ app.post("/webhook", bodyParser.raw({ type: "application/json" }), async (req, r
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
-
     try {
       await db.collection("orders").add({
         sessionId: session.id,
@@ -63,17 +63,14 @@ app.post("/webhook", bodyParser.raw({ type: "application/json" }), async (req, r
   res.json({ received: true });
 });
 
-// ✅ Middleware
-app.use(cors());
-app.use(express.json());
-
-// ✅ Create Stripe Checkout Session
+// ✅ Checkout session route
 app.post("/create-checkout-session", async (req, res) => {
   try {
     const { plan } = req.body;
+    console.log("🔥 Checkout route hit with plan:", plan);
 
     const priceMap = {
-      "1month": "price_1RnWgKEe6rE629wT5Tk6FGeW", // update with your real Price IDs
+      "1month": "price_1RnWgKEe6rE629wT5Tk6FGeW",  // <- Update if needed
       "3month": "price_1RnWi4Ee6rE629wToD1Aqf3L",
     };
 
@@ -101,10 +98,16 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error("Error creating checkout session:", err.message);
+    console.error("❌ Error creating checkout session:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
+// ✅ Root test route (important for Render)
+app.get("/", (req, res) => {
+  res.send("✅ Her Cut backend is live");
+});
+
+// ✅ Start the server
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
