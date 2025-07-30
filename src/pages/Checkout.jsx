@@ -24,9 +24,10 @@ export default function Checkout() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://hercut-backend.onrender.com/create-checkout-session?debug=herism-netlify",
+        "https://hercut-site.onrender.com/create-checkout-session",
         { plan }
       );
+
 
 
       if (response.data?.url) {
