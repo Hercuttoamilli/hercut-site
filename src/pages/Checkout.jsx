@@ -9,8 +9,7 @@ export default function Checkout() {
   const handleCheckout = async () => {
     if (cartItems.length === 0) return;
 
-    // Step 1: Determine plan from cart
-    const firstItemName = cartItems[0].name.toLowerCase().replace(/-/g, " ");
+    const firstItemName = cartItems[0].name.toLowerCase();
     let plan;
 
     if (firstItemName.includes("1 bottle")) {
@@ -18,20 +17,25 @@ export default function Checkout() {
     } else if (firstItemName.includes("3 bottles")) {
       plan = "3month";
     } else {
-      alert("Unrecognized product in cart");
+      alert("Unrecognized product in cart.");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await axios.post("https://hercut-backend.onrender.com/create-checkout-session", {
+      const response = await axios.post(
+        "https://hercut-backend.onrender.com/create-checkout-session",
+        { plan }
+      );
 
-        plan,
-      });
-      window.location.href = response.data.url;
+      if (response.data?.url) {
+        window.location.href = response.data.url;
+      } else {
+        throw new Error("Stripe URL not received");
+      }
     } catch (error) {
+      console.error("Checkout error:", error);
       alert("Something went wrong. Please try again.");
-      console.error(error);
       setLoading(false);
     }
   };
