@@ -6,7 +6,6 @@ import bodyParser from "body-parser";
 import admin from "firebase-admin";
 
 dotenv.config();
-
 const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -28,11 +27,7 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-// ✅ Middleware
-app.use(cors());
-app.use(express.json());
-
-// ✅ Webhook for Stripe
+// ✅ Stripe webhook (must go BEFORE express.json())
 app.post("/webhook", bodyParser.raw({ type: "application/json" }), async (req, res) => {
   const sig = req.headers["stripe-signature"];
   let event;
@@ -63,14 +58,18 @@ app.post("/webhook", bodyParser.raw({ type: "application/json" }), async (req, r
   res.json({ received: true });
 });
 
-// ✅ Checkout session route
+// ✅ Middleware (MUST come after webhook)
+app.use(cors());
+app.use(express.json());
+
+// ✅ Checkout route
 app.post("/create-checkout-session", async (req, res) => {
   try {
     const { plan } = req.body;
     console.log("🔥 Checkout route hit with plan:", plan);
 
     const priceMap = {
-      "1month": "price_1RnWgKEe6rE629wT5Tk6FGeW",  // <- Update if needed
+      "1month": "price_1RnWgKEe6rE629wT5Tk6FGeW",
       "3month": "price_1RnWi4Ee6rE629wToD1Aqf3L",
     };
 
@@ -103,11 +102,11 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// ✅ Root test route (important for Render)
+// ✅ Render healthcheck route
 app.get("/", (req, res) => {
   res.send("✅ Her Cut backend is live");
 });
 
-// ✅ Start the server
+// ✅ Server listen
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
