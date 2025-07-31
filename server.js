@@ -87,8 +87,8 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "https://herismwellness.com/success",
-      cancel_url: "https://herismwellness.com/cancel",
+      success_url: "https://hercut.net/success",
+      cancel_url: "https://hercut.net/cancel",
       customer_creation: "always",
       shipping_address_collection: {
         allowed_countries: ["US", "CA"],
