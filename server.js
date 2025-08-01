@@ -65,28 +65,22 @@ app.use(express.json());
 // ✅ Checkout route
 app.post("/create-checkout-session", async (req, res) => {
   try {
-    const { plan } = req.body;
-    console.log("🔥 Checkout route hit with plan:", plan);
+    const { cartItems } = req.body;
 
     const priceMap = {
       "1month": "price_1RnWgKEe6rE629wT5Tk6FGeW",
       "3month": "price_1RnWi4Ee6rE629wToD1Aqf3L",
     };
 
-    const selectedPriceId = priceMap[plan];
-    if (!selectedPriceId) {
-      return res.status(400).json({ error: "Invalid plan selected" });
-    }
+    const line_items = cartItems.map((item) => ({
+      price: priceMap[item.id],
+      quantity: item.quantity,
+    }));
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      line_items: [
-        {
-          price: selectedPriceId,
-          quantity: 1,
-        },
-      ],
+      line_items,
       success_url: "https://hercut.net/success",
       cancel_url: "https://hercut.net/cancel",
       customer_creation: "always",
@@ -97,10 +91,11 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error("❌ Error creating checkout session:", err.message);
+    console.error("❌ Stripe error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
 
 // ✅ Render healthcheck route
 app.get("/", (req, res) => {

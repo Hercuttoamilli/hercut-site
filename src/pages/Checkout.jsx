@@ -7,40 +7,45 @@ export default function Checkout() {
   const [loading, setLoading] = useState(false);
 
   const handleCheckout = async () => {
-    if (cartItems.length === 0) return;
+  if (cartItems.length === 0) return;
 
-    const firstItemName = cartItems[0].name.toLowerCase();
-    let plan;
+  const lineItems = cartItems.map((item) => {
+    let id;
 
-    if (firstItemName.includes("1 bottle")) {
-      plan = "1month";
-    } else if (firstItemName.includes("3 bottles")) {
-      plan = "3month";
+    if (item.name.toLowerCase().includes("1 bottle")) {
+      id = "1month";
+    } else if (item.name.toLowerCase().includes("3 bottles")) {
+      id = "3month";
     } else {
-      alert("Unrecognized product in cart.");
-      return;
+      alert("Unrecognized product: " + item.name);
+      throw new Error("Unrecognized product: " + item.name);
     }
 
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        "https://hercut-site.onrender.com/create-checkout-session",
-        { plan }
-      );
+    return {
+      id,
+      quantity: item.quantity,
+    };
+  });
 
+  setLoading(true);
+  try {
+    const response = await axios.post(
+      "https://hercut-site.onrender.com/create-checkout-session",
+      { cartItems: lineItems }
+    );
 
-
-      if (response.data?.url) {
-        window.location.href = response.data.url;
-      } else {
-        throw new Error("Stripe URL not received");
-      }
-    } catch (error) {
-      console.error("Checkout error:", error);
-      alert("Something went wrong. Please try again.");
-      setLoading(false);
+    if (response.data?.url) {
+      window.location.href = response.data.url;
+    } else {
+      throw new Error("Stripe URL not received");
     }
-  };
+  } catch (error) {
+    console.error("Checkout error:", error);
+    alert("Something went wrong. Please try again.");
+    setLoading(false);
+  }
+};
+
 
   if (cartItems.length === 0) {
     return (
