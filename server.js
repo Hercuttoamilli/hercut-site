@@ -59,7 +59,14 @@ app.post("/webhook", bodyParser.raw({ type: "application/json" }), async (req, r
 });
 
 // ✅ Middleware (MUST come after webhook)
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://hercut.net", "http://localhost:5173"],
+    methods: ["GET", "POST", "OPTIONS"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // ✅ Checkout route
