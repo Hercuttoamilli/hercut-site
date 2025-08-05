@@ -71,8 +71,9 @@ export default function Hero() {
         <img
           src={hercutbottle}
           alt="Her Cut Bottle"
-          className="relative z-10 w-[280px] sm:w-[340px] md:w-[400px] lg:w-[460px] drop-shadow-xl transition-transform duration-700 hover:rotate-[-1.5deg]"
+          className="relative z-10 w-[280px] sm:w-[340px] md:w-[400px] lg:w-[460px] drop-shadow-xl animate-rotate-in"
         />
+
 
         <p className="mt-10 text-white/50 text-sm animate-pulse">↓ scroll</p>
       </div>
