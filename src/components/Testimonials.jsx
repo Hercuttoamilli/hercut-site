@@ -69,10 +69,16 @@ export default function Section4_ReviewGallery() {
   return (
     <section className="bg-black text-white py-24 px-6">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-10 text-center">What Women Are Saying</h2>
+        <h2 className="text-3xl sm:text-4xl font-semibold mb-4 text-center">
+          What Women Are Saying
+        </h2>
+        <p className="text-white/60 text-center max-w-xl mx-auto mb-12 text-sm sm:text-base">
+          These aren’t influencers. These are real women who tried Her Cut — and finally felt control, clarity, and results.
+        </p>
+
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide"
         >
           {reviews.map((review, i) => (
             <motion.div
@@ -80,19 +86,25 @@ export default function Section4_ReviewGallery() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="snap-start shrink-0 w-80 bg-white/5 border border-white/10 backdrop-blur-sm rounded-xl p-6 space-y-4"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="snap-start shrink-0 w-80 bg-white/5 border border-white/10 backdrop-blur-sm rounded-xl p-6 space-y-4 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition"
             >
               <div>
                 <p className="font-semibold text-white">{review.name}</p>
                 <p className="text-xs text-white/60">Verified Review</p>
               </div>
               <blockquote>
-                <p className="text-lg italic text-white/80">“{review.quote}”</p>
+                <p className="text-lg italic text-white/80 leading-snug">“{review.quote}”</p>
               </blockquote>
               <p className="text-sm text-white/60 leading-relaxed">{review.fullReview}</p>
             </motion.div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <button className="text-white/70 text-sm underline hover:text-white transition">
+            Read More Stories →
+          </button>
         </div>
       </div>
     </section>

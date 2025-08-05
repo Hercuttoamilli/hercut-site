@@ -15,7 +15,7 @@ export default function Hero() {
         className="text-d4 text-lg sm:text-xl font-medium mb-4 max-w-md animate-fade-up"
         style={{ animationDelay: "0.2s", animationFillMode: "both" }}
       >
-        Clinical Fat-Loss Support — Refined.
+        Fat-burning clarity for women who crave control.
       </h2>
 
       {/* Body Copy */}
@@ -23,7 +23,7 @@ export default function Hero() {
         className="text-white/80 text-base max-w-md leading-relaxed mb-6 animate-fade-up"
         style={{ animationDelay: "0.4s", animationFillMode: "both" }}
       >
-        Her Cut blends L-Carnitine, MCTs, Choline, and botanical extracts to support fat metabolism, appetite control, and energy balance — all while respecting female hormonal rhythms. No fluff. Just clinical formulation.
+        Her Cut combines clinically-backed ingredients like L-Carnitine, MCTs, and adaptogens to support real fat metabolism, stable energy, and appetite control — all without wrecking your hormones. It's not hype. It's your new ritual.
       </p>
 
       {/* Luxury Pills */}
@@ -39,6 +39,9 @@ export default function Hero() {
         </span>
         <span className="px-4 py-1 text-xs rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white/70 hover:text-white hover:border-white transition">
           90 capsules
+        </span>
+        <span className="px-4 py-1 text-xs rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-rose-100/70 hover:text-white hover:border-white transition">
+          Designed for real control
         </span>
       </div>
 
@@ -63,17 +66,14 @@ export default function Hero() {
 
       {/* Bottle + Glow */}
       <div className="relative flex flex-col justify-center items-center">
-        {/* Softer glow */}
         <div className="w-[300px] h-[300px] rounded-full bg-[#ffffff0c] blur-3xl absolute z-0" />
 
-        {/* Bottle image */}
         <img
           src={hercutbottle}
           alt="Her Cut Bottle"
           className="relative z-10 w-[280px] sm:w-[340px] md:w-[400px] lg:w-[460px] drop-shadow-xl transition-transform duration-700 hover:rotate-[-1.5deg]"
         />
 
-        {/* Scroll cue */}
         <p className="mt-10 text-white/50 text-sm animate-pulse">↓ scroll</p>
       </div>
     </section>

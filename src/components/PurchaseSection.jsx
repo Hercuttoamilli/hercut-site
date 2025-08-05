@@ -11,18 +11,20 @@ const plans = [
     price: 38.0,
     quantity: 1,
     highlight: false,
-    badges: ["Starter Plan", "Stimulant-Free"],
-    note: "Great for a light reset or trial month.",
+    badges: ["Gentle Reset", "Zero Stimulants"],
+    note: "Perfect for a soft entry into your cut — ideal if you're just getting started.",
+    belief: "Feel the shift in appetite, energy, and bloat within 2 weeks.",
   },
   {
     id: "90-day",
     title: "3 Bottles",
     sub: "90-Day Supply • Best Results",
     price: 96.0,
-    quantity: 1, // Just 1 product in cart; logic handled in backend
+    quantity: 1,
     highlight: true,
-    badges: ["Best Value", "Free U.S. Shipping", "Stimulant-Free"],
-    note: "Clinically-backed window to experience true change.",
+    badges: ["Best Value", "Free U.S. Shipping", "Visible Results"],
+    note: "Designed for transformation — stack consistency for deep hormonal & metabolic impact.",
+    belief: "Our most chosen plan. Noticeable changes by week 3 — commitment pays off.",
   },
 ];
 
@@ -36,7 +38,7 @@ export default function Section5_PurchaseOptions() {
       id: plan.id,
       name: plan.title,
       price: plan.price,
-      quantity: 1, // always 1, we treat 3-bottle plan as one unit
+      quantity: 1,
     });
     toast.success(`${plan.title} added to cart`);
   };
@@ -44,9 +46,9 @@ export default function Section5_PurchaseOptions() {
   return (
     <section className="bg-black text-white px-6 py-28" id="purchase">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4">Choose Your Plan</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4">Choose Your Ritual</h2>
         <p className="text-white/60 text-sm max-w-xl mx-auto mb-14">
-          No subscriptions. No auto-billing. Just real results backed by science.
+          One-time purchase. No auto-billing. Just a formula that women trust — for real metabolic support.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
@@ -61,13 +63,15 @@ export default function Section5_PurchaseOptions() {
             >
               {plan.highlight && (
                 <div className="absolute top-3 right-4 bg-pink-400 text-xs px-3 py-1 rounded-full font-medium tracking-wide text-black">
-                  Best Results
+                  Most Popular
                 </div>
               )}
 
               <h3 className="text-xl font-semibold">{plan.title}</h3>
               <p className="text-sm text-white/70 mb-3">{plan.sub}</p>
-              <p className="text-3xl font-bold mb-4">${plan.price.toFixed(2)}</p>
+              <p className="text-3xl font-bold mb-2">${plan.price.toFixed(2)}</p>
+
+              <p className="text-xs text-white/80 mb-4 italic">{plan.belief}</p>
 
               <div className="flex flex-wrap gap-2 mb-4 justify-center">
                 {plan.badges.map((badge, idx) => (
@@ -80,7 +84,7 @@ export default function Section5_PurchaseOptions() {
                 ))}
               </div>
 
-              <p className="text-xs text-white/60 mb-6 italic">{plan.note}</p>
+              <p className="text-xs text-white/60 mb-6">{plan.note}</p>
 
               <button
                 onClick={() => handleAdd(plan)}
@@ -96,15 +100,15 @@ export default function Section5_PurchaseOptions() {
         <div className="mt-16 grid sm:grid-cols-3 gap-6 text-sm text-white/60">
           <div className="flex items-center justify-center gap-2">
             <CheckCircle size={16} className="text-green-400" />
-            USA-Manufactured in GMP-Certified Facility
+            Made in a GMP-Certified U.S. Facility
           </div>
           <div className="flex items-center justify-center gap-2">
             <CheckCircle size={16} className="text-green-400" />
-            Transparent, Clinical-Backed Dosing
+            Clinical Dosing Transparency
           </div>
           <div className="flex items-center justify-center gap-2">
             <CheckCircle size={16} className="text-green-400" />
-            No Auto-Billing or Hidden Charges
+            No Auto-Billing — Ever
           </div>
         </div>
       </div>

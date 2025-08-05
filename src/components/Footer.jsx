@@ -26,22 +26,22 @@ export default function Footer() {
     <footer className="bg-black border-t border-white/10 text-white px-6 py-16 backdrop-blur-md">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-sm">
         
-        {/* Column 1: Navigation */}
+        {/* Column 1: Explore */}
         <div className="space-y-4">
-          <h4 className="font-semibold text-lg text-white">Navigation</h4>
+          <h4 className="font-semibold text-lg text-white tracking-tight">Explore</h4>
           <ul className="space-y-2 text-white/70">
-            <li><Link to="/" className="hover:text-white">Home</Link></li>
-            <li><Link to="/estimator" className="hover:text-white">Estimator</Link></li>
-            <li><Link to="/ingredients" className="hover:text-white">Ingredients</Link></li>
-            <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+            <li><Link to="/" className="hover:text-white transition">Home</Link></li>
+            <li><Link to="/estimator" className="hover:text-white transition">Estimator</Link></li>
+            <li><Link to="/ingredients" className="hover:text-white transition">Ingredients</Link></li>
+            <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
           </ul>
         </div>
 
         {/* Column 2: Newsletter */}
         <div className="space-y-5">
-          <h4 className="font-semibold text-lg text-white">Join the Ritual</h4>
+          <h4 className="font-semibold text-lg text-white tracking-tight">Join the Ritual</h4>
           <p className="text-white/70 leading-relaxed">
-            Get clinical insights, fat-loss rituals, and limited drops. We email sparingly — only the essentials.
+            Receive exclusive drops, ritual insights, and research-backed guidance. No spam — just clarity.
           </p>
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
             <input
@@ -65,22 +65,23 @@ export default function Footer() {
           )}
         </div>
 
-        {/* Column 3: Legal + Social */}
+        {/* Column 3: Trust & Connect */}
         <div className="space-y-5 flex flex-col justify-between">
           <div className="space-y-4">
-            <h4 className="font-semibold text-lg text-white">Legal</h4>
+            <h4 className="font-semibold text-lg text-white tracking-tight">Trust & Contact</h4>
             <ul className="space-y-2 text-white/70">
-              <li><Link to="/terms" className="hover:text-white">Terms of Service</Link></li>
-              <li><Link to="/privacy" className="hover:text-white">Privacy Policy</Link></li>
-              <li><a href="mailto:hercutofficial@gmail.com" className="hover:text-white">hercutofficial@gmail.com</a></li>
+              <li><Link to="/terms" className="hover:text-white transition">Terms of Service</Link></li>
+              <li><Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+              <li><a href="mailto:hercutofficial@gmail.com" className="hover:text-white transition">hercutofficial@gmail.com</a></li>
             </ul>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 pt-2">
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/60 hover:text-white transition"
+              aria-label="Instagram"
             >
               <FaInstagram size={20} />
             </a>
@@ -89,6 +90,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/60 hover:text-white transition"
+              aria-label="TikTok"
             >
               <SiTiktok size={20} />
             </a>
@@ -98,7 +100,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="text-center text-xs text-white/50 mt-12">
-        © {new Date().getFullYear()} Her Cut. Rituals for real women. All rights reserved.
+        © {new Date().getFullYear()} Her Cut — Designed for the woman who wants control. All rights reserved.
       </div>
     </footer>
   );

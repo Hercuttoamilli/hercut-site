@@ -14,6 +14,12 @@ import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
 import ReviewForm from "./pages/ReviewForm";
 import Ingredients from "./pages/Ingredients";
+import HormonesNotHabits from "./blog/HormonesNotHabits";
+import CleanEatingBloat from "./blog/CleanEatingBloat";
+import FatLossAfter25 from "./blog/FatLossAfter25";
+import MetabolicChemistry from "./blog/MetabolicChemistry";
+import RealWeightLoss from "./blog/RealWeightLoss";
+
 
 function App() {
   return (
@@ -34,6 +40,12 @@ function App() {
       <Route path="/cancel" element={<Cancel />} />
       <Route path="/write-review" element={<ReviewForm />} />
       <Route path="/ingredients" element={<Ingredients />} />
+      <Route path="/blog/hormones-not-habits" element={<HormonesNotHabits />} />
+      <Route path="/blog/clean-eating-bloat" element={<CleanEatingBloat />} />
+      <Route path="/blog/fat-loss-after-25" element={<FatLossAfter25 />} />
+      <Route path="/blog/metabolic-chemistry" element={<MetabolicChemistry />} />
+      <Route path="/blog/real-weight-loss" element={<RealWeightLoss />} />
+
     </Routes>
 
   );
