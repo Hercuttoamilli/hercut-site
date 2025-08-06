@@ -75,26 +75,7 @@ export default function Footer() {
               <li><a href="mailto:hercutofficial@gmail.com" className="hover:text-white transition">hercutofficial@gmail.com</a></li>
             </ul>
           </div>
-          <div className="flex items-center gap-4 pt-2">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/60 hover:text-white transition"
-              aria-label="Instagram"
-            >
-              <FaInstagram size={20} />
-            </a>
-            <a
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/60 hover:text-white transition"
-              aria-label="TikTok"
-            >
-              <SiTiktok size={20} />
-            </a>
-          </div>
+          
         </div>
       </div>
 

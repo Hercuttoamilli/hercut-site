@@ -5,7 +5,7 @@ const faqs = [
   {
     question: "How should I take Her Cut?",
     answer:
-      "Take 2 capsules each morning with water before your first meal. For best results, stay consistent daily — especially during hormonal cycles or diet phases.",
+      "Take 2 capsules each morning and each night with water before your first meal and last meal. For best results, stay consistent daily — especially during hormonal cycles or diet phases.",
   },
   {
     question: "Will it help control my cravings?",
