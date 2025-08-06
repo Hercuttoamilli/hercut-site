@@ -6,7 +6,6 @@ import PurchaseSection from "../components/PurchaseSection";
 import FAQ from "../components/FAQ";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import BlogScroll from "../components/BlogScroll";
 
 export default function Home() {
   return (
@@ -16,7 +15,7 @@ export default function Home() {
         <Hero />
         <WhyHerCut />
         <BenefitTiles />
-        <BlogScroll />
+       
         <Testimonials />
         <PurchaseSection />
         <FAQ />

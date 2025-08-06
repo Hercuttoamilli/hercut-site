@@ -14,7 +14,6 @@ export default function Estimator() {
   const [email, setEmail] = useState("");
   const [result, setResult] = useState(null);
   const [signupSuccess, setSignupSuccess] = useState(false);
-  const [aiPlan, setAiPlan] = useState(null);
 
   const handleEstimate = () => {
     if (!weight || !height || !age || isNaN(weight) || isNaN(height) || isNaN(age)) {
@@ -40,31 +39,6 @@ export default function Estimator() {
     setResult(
       `Estimated fat loss over 1–3 months: ~${estimatedFatLoss.toFixed(1)} lbs with consistent Her Cut use and ${activityLevel} activity.`
     );
-
-    let plan = [];
-    if (activityLevel === "low") {
-      plan = [
-        "🧘‍♀️ 20-min morning walk after water",
-        "🥗 Warm cooked meals > raw veggies",
-        "🛏️ Prioritize deep sleep (7–8 hrs)",
-        "💊 Take Her Cut before meals (2+2)",
-      ];
-    } else if (activityLevel === "moderate") {
-      plan = [
-        "🏋️‍♀️ Strength training 3x/week (Upper/Lower split)",
-        "🚶‍♀️ Walks after dinner to improve insulin response",
-        "🍳 High-protein breakfast daily",
-        "💊 Take Her Cut with protein-rich meals",
-      ];
-    } else {
-      plan = [
-        "🔥 Push/Pull/Legs split 4–5x/week",
-        "🧃 Pre-workout carbs + Her Cut for fat oxidation",
-        "💤 Track recovery & optimize sleep quality",
-        "🥗 Anti-inflammatory diet (berries, greens, turmeric)",
-      ];
-    }
-    setAiPlan(plan);
   };
 
   const handleSignup = async (e) => {
@@ -97,7 +71,7 @@ export default function Estimator() {
         <div className="max-w-lg w-full p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg shadow-xl">
           <h1 className="text-3xl font-semibold text-center mb-4">Estimate Your Results</h1>
           <p className="text-sm text-white/70 text-center mb-6">
-            Fill in your stats. We’ll project your 1–3 month fat loss + give you a ritual plan that actually works.
+            Fill in your stats. We’ll project your 1–3 month fat loss.
           </p>
 
           <div className="space-y-5">
@@ -172,30 +146,12 @@ export default function Estimator() {
               onClick={handleEstimate}
               className="w-full bg-white text-black font-semibold py-3 rounded-full hover:bg-white/90 transition-all"
             >
-              Get My Estimate + Ritual Plan
+              Get My Estimate
             </button>
 
             {result && (
-              <div className="mt-6 space-y-4">
-                <div className="p-4 bg-white/10 border border-white/10 rounded-xl text-center text-lg text-white animate-fadeIn">
-                  {result}
-                </div>
-
-                {aiPlan && (
-                  <div className="p-4 bg-white/5 border border-white/10 rounded-xl">
-                    <h3 className="text-white font-semibold text-sm mb-2 text-center">Your Ritual Starter Plan</h3>
-                    <ul className="list-disc list-inside text-white/80 space-y-1">
-                      {aiPlan.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                
-
-
-
+              <div className="mt-6 p-4 bg-white/10 border border-white/10 rounded-xl text-center text-lg text-white animate-fadeIn">
+                {result}
               </div>
             )}
 
